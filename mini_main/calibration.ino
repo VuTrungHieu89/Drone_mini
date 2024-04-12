@@ -1,6 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//In this part the level calibration procedres are handled.
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void calibrate_level(void) {
   level_calibration_on = 1;
@@ -43,15 +41,15 @@ void calibrate_level(void) {
   level_calibration_on = 0;
   gyro_signalen();
   //Accelerometer angle calculations
-  acc_total_vector = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));    //Calculate the total accelerometer vector.
+  acc_total_vector = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));    
 
-  if (abs(acc_y) < acc_total_vector) {                                             //Prevent the asin function to produce a NaN.
-    angle_pitch_acc = asin((float)acc_y / acc_total_vector) * 57.296;              //Calculate the pitch angle.
+  if (abs(acc_y) < acc_total_vector) {                                          
+    angle_pitch_acc = asin((float)acc_y / acc_total_vector) * 57.296;            
   }
-  if (abs(acc_x) < acc_total_vector) {                                             //Prevent the asin function to produce a NaN.
-    angle_roll_acc = asin((float)acc_x / acc_total_vector) * 57.296;               //Calculate the roll angle.
+  if (abs(acc_x) < acc_total_vector) {                                           
+    angle_roll_acc = asin((float)acc_x / acc_total_vector) * 57.296;              
   }
-  angle_pitch = angle_pitch_acc;                                                   //Set the gyro pitch angle equal to the accelerometer pitch angle when the quadcopter is started.
+  angle_pitch = angle_pitch_acc;                                                   
   angle_roll = angle_roll_acc;
-  loop_timer = micros();                                                           //Set the timer for the next loop.
+  loop_timer = micros();                                                   
 }
